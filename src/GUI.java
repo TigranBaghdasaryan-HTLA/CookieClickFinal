@@ -23,14 +23,24 @@ public class GUI implements ActionListener {
         cookiePanel = new JPanel();
 
         Color pinkBg = Color.PINK;
-        Color buttonBg = new Color(255, 182, 193);
+
+        Color[] buttonColors = {
+                new Color(255, 240, 245),
+                new Color(255, 218, 185),
+                new Color(255, 182, 193),
+                new Color(255, 105, 180),
+                new Color(219, 112, 147),
+                new Color(199, 21, 133),
+                new Color(139, 0, 139),
+                new Color(75, 0, 130)
+        };
 
         cookieLabel = new JLabel("Cookies: 0", SwingConstants.CENTER);
         cookieLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
         String[] upgradeNames = {
-                "1. Mouse", "2. Grandma", "3. Oven", "4. Factory",
-                "5. Frenzy", "6. Golden Cookie", "7. Lab", "8. Portal"
+                "1. Upgrade", "2. Slow Grandma", "3. Grandma", "4. Fast Grandma ",
+                "5. Super Upgrade", "6. Hyper Upgrade", "7. Superfast Grandma", "8. hyperfast Grandma"
         };
 
         buttonPanel.setLayout(new GridLayout(4, 4, 5, 5));
@@ -39,7 +49,17 @@ public class GUI implements ActionListener {
         for (int i = 0; i < 8; i++) {
             final int index = i;
             upgradeButtons[i] = new JButton(upgradeNames[i]);
-            upgradeButtons[i].setBackground(buttonBg);
+
+            upgradeButtons[i].setBackground(buttonColors[i]);
+            upgradeButtons[i].setOpaque(true);
+            upgradeButtons[i].setBorderPainted(false);
+
+            if (i >= 6) {
+                upgradeButtons[i].setForeground(Color.WHITE);
+            } else {
+                upgradeButtons[i].setForeground(Color.BLACK);
+            }
+
             upgradeButtons[i].addActionListener(e -> game.buyUpgrade(index));
 
             costLabels[i] = new JLabel("Cost: " + game.upgradeCosts[i], SwingConstants.CENTER);
@@ -48,7 +68,7 @@ public class GUI implements ActionListener {
             buttonPanel.add(costLabels[i]);
         }
 
-        cookieButton = new JButton("CLICK ME!");
+        cookieButton = new JButton("Cookies");
         cookieButton.setFont(new Font("Arial", Font.BOLD, 22));
         cookieButton.setBackground(Color.WHITE);
         cookieButton.addActionListener(e -> game.cookieClick());
@@ -87,3 +107,7 @@ public class GUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) { }
 }
+
+
+
+
